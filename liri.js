@@ -15,18 +15,6 @@ var client = new Twitter(keys.twitter);
 
 
 
-
-//if (nodeArgument[2] === 'my-tweets'){
- // showTweets();
-//} else if (argumentOne[2] === 'spotify-this-song') {
-  //showSpotify();
-//} else if (argumentOne[2] === 'movie-this') {
-  //showOMDB();
-//} else {
-  //console.log("missing arg information");
-  //return;
-//}
-
 switch (commandList) {
   case 'my-tweets':
   myTweetFeed();
@@ -67,9 +55,9 @@ function spotifyThisSong(userInput) {
   //User will select a song, if they do not a default song will be chosen for them.
   if (userInput === undefined) {
       userChoice = "Jungle by Tash Sultanta";
-      console.log("Do you want Jungle by Tash Sultana? " + userInput);
+      console.log("Do you want Jungle by Tash Sultana? " + userChoice);
   }
-  spotify.search({ type: "track", query: userInput }, function(err, data) {
+  spotify.search({ type: "track", query: userChoice}, function(err, data) {
       // console.log(data.tracks.items[0]);
       console.log("Artist: " + data.tracks.items[0].artists[0].name);
       console.log("Song Name: " + data.tracks.items[0].name);
