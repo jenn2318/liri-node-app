@@ -7,7 +7,7 @@ var request = require ('request');
 var omdb = require ('omdb');
 var fs = require ('fs');
 var keys = require ('./keys.js');
-var commandsToDo = process.argv[2];
+var commandList = process.argv[2];
 var userChoice = process.argv[3];
 
 var spotify = new Spotify(keys.spotify);
@@ -27,9 +27,9 @@ var client = new Twitter(keys.twitter);
   //return;
 //}
 
-switch (commandsToDo) {
+switch (commandList) {
   case 'my-tweets':
-  myTweets();
+  myTweetFeed();
   break;
   case 'spotify-this-song':
   spotifyThisSong(userChoice);
@@ -44,9 +44,9 @@ switch (commandsToDo) {
 
 
 
-function myTweets() {
+function myTweetsFeed() {
 
-  //Call to Twitter API to get the user's timeline
+  //Call to Twitter API to get timeline information
   client.get('statuses/user_timeline', { screen_name: 'JPCoder777' }, function(error, tweets, response) {
       if (!error) {
           for (var i = 0; i <= 3; i++) {
@@ -55,7 +55,7 @@ function myTweets() {
               console.log("It worked!");
           }
       } else {
-          //error message if there is a error
+          //error message to display if error found
           console.error("Ooops it didn't work!");
           console.log("Error Status Code = " + response.statusCode);
       }
@@ -63,6 +63,7 @@ function myTweets() {
 };
 
 function spotifyThisSong(userInput) {
+
   //User will select a song, if they do not a default song will be chosen for them.
   if (userInput === undefined) {
       userChoice = "Jungle by Tash Sultanta";
@@ -74,32 +75,43 @@ function spotifyThisSong(userInput) {
       console.log("Song Name: " + data.tracks.items[0].name);
       console.log("Link: " + data.tracks.items[0].external_urls.spotify);
       console.log("Album Name: " + data.tracks.items[0].album.name);
-      console.log("------------------------");
+      console.log("-------------------");
   });
+};
+
+fs.readFile('./random.txt', 'utf8', function(err, data) {
+  if (err) {
+    console.log(err);
+  }
+  data = question;
+  console.log('data');
+  song(question);
+})
 };
 
 
 function movieThis(userChoice) {
 
-  var title = 'The Wolf of Wall Street';
+  //var title = 'The Wolf of Wall Street'
 
-  request("http://www.omdbapi.com/?apikey=50483e6b=" + title, function(error, response, body){
+  queryUrl =  "http://www.omdbapi.com/?t=" + userChoice + "&y=&plot=short&apikey=" + omdbKey;
+
+  request(queryUrl, function(error, response, body){
 
       if (!error) {
-
           var body = JSON.parse(body);
-
           console.log("Title: " + body.Title);
           console.log("Year: " + body.Year);
           console.log("IMDb Rating: " + body.imdbRating);
-          console.log("Rotten Tomatoes Rating: " + body.rottenTomatoes)
+          console.log('rottenRating: ' + movieObject.rottenRating);
+			    console.log('rottenURL: ' + movieObject.tomatoURL);
           console.log("Country: " + body.Country);
           console.log("Language: " + body.Language);
           console.log("Plot: " + body.Plot);
           console.log("Actors: " + body.Actors);
 
           if (userChoice === undefined) {
-           userChoice = 'Mr. Nobody';
+           userChoice = 'The Wold of Wall Street';
            console.log("Watch this movie!");
           }
           
