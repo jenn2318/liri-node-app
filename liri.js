@@ -1,8 +1,8 @@
 
 
-var twitter = require ('twitter');
-var env = require('env');
-var nodepSpotifyAPI = require ('node-spotify-api');
+var Twitter = require ('twitter');
+//var env = require('dotenv');
+var Spotify = require ('node-spotify-api');
 var request = require ('request');
 var omdb = require ('omdb');
 var fs = require ('fs');
@@ -71,11 +71,11 @@ fs.readFile('./random.txt', 'utf8', function(err, data) {
   if (err) {
     console.log(err);
   }
-  data = question;
-  console.log('data');
-  song(question);
+  //data = question;
+  console.log('data', data);
+  //song(data);
 })
-};
+
 
 
 function movieThis(userChoice) {
