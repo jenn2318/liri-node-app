@@ -4,20 +4,21 @@ var Twitter = require ('twitter');
 //var env = require('dotenv');
 var Spotify = require ('node-spotify-api');
 var request = require ('request');
-var omdb = require ('omdb');
+
 var fs = require ('fs');
 var keys = require ('./keys.js');
 var commandList = process.argv[2];
 var userChoice = process.argv[3];
+var parameter = {screen_name: 'JPCoder777'};
 
-var spotify = new Spotify(keys.spotify);
+//var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 
 
 switch (commandList) {
   case 'my-tweets':
-  myTweetFeed();
+  doTweetFeed();
   break;
   case 'spotify-this-song':
   spotifyThisSong(userChoice);
@@ -26,20 +27,20 @@ switch (commandList) {
   movieThis(userChoice);
   break;
   case 'do-what-it-says':
-  doWhatItSays('do-what-it-says');
+  doWhatItSays();
   break;
 }
 
 
 
-function myTweetsFeed() {
+function doTweetFeed() {
 
   //Call to Twitter API to get timeline information
   client.get('statuses/user_timeline', { screen_name: 'JPCoder777' }, function(error, tweets, response) {
       if (!error) {
           for (var i = 0; i <= 3; i++) {
               console.log("Me Tweets: " + JSON.stringify(tweets[i].text, null, 2));
-              console.log(tweets[i].created_at);
+              //console.log(tweets[i].created_at);
               console.log("It worked!");
           }
       } else {
@@ -50,13 +51,18 @@ function myTweetsFeed() {
   });
 };
 
-function spotifyThisSong(userInput) {
+function spotifyThisSong(commandList, userChoice) {
 
   //User will select a song, if they do not a default song will be chosen for them.
-  if (userInput === undefined) {
-      userChoice = "Jungle by Tash Sultanta";
-      console.log("Do you want Jungle by Tash Sultana? " + userChoice);
-  }
+  if (commandList === "spotify-this-song") {
+     var song = userChoice;
+   if (song === undefined) {
+    //userChoice = "Jungle by Tash Sultanta";
+    console.log("Do you want Jungle by Tash Sultana? " + userChoice);
+    }    
+  }  
+  else {
+  var songData = response.tracks.items[0]
   spotify.search({ type: "track", query: userChoice}, function(err, data) {
       // console.log(data.tracks.items[0]);
       console.log("Artist: " + data.tracks.items[0].artists[0].name);
@@ -65,6 +71,7 @@ function spotifyThisSong(userInput) {
       console.log("Album Name: " + data.tracks.items[0].album.name);
       console.log("-------------------");
   });
+ };
 };
 
 fs.readFile('./random.txt', 'utf8', function(err, data) {
