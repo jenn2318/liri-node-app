@@ -3,7 +3,7 @@ var Twitter = require ('twitter');
 //var env = require('dotenv'); It is already required in keys.js
 var Spotify = require ('node-spotify-api');
 var request = require ('request');
-var omdb = require ('omdb');
+//var omdb = require ('omdb');
 
 var fs = require ('fs');
 var keys = require ('./keys.js');
@@ -16,6 +16,8 @@ var spotifyParam = {user_name: 'jshaun300'};
 //var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 var spotify = new Spotify(keys.spotify);
+var omdb = keys.omdb;
+console.log('omdb', omdb);
 
 
 
@@ -43,7 +45,7 @@ function doTweetFeed() {
           for (var i = 0; i < tweets.length; i++) {
               var tweetsText = (tweets[i].text);
               var tweetsCreated = (tweets[i].created_at);
-              console.log("my-tweets: " + JSON.parse(tweets[i].text, null, 2));
+              console.log("my-tweets: " + tweets[i].text, null, 2);
               console.log(tweets[i].created_at);
               console.log("Tweet:" + tweets[i].text);
               //console.log ('Time' + tweets[i].created_at);
@@ -99,32 +101,22 @@ function doWhatItSays() {
   });
 }
 		
-
 function movieGrab (userChoice) { 
-
-  if (userChoice === undefined) 
-      var movieTitle = "Mr Nobody"; 
-
-//This is the omdb API key with a user choice if the user puts one in to query
-//queryUrl =  "http://www.omdbapi.com/?t=" + userChoice + "&y=&plot=short&apikey=" + keys.omdb.key;
-
-request ("http://www.omdbapi.com/?t=" + (userChoice || 'Mr Nobody') + "&y=&plot=short&apikey=" , function (error, response, body) { 
-
-   if (!error && response.statusCode === 200) {
-      console.log('');
-      console.log ('Title' + JSON.parse(body).Title);
-      console.log('Year: '+ JSON.parse(body).year);
-      console.log('IMDB Rating: '+ JSON.parse(body).imdRbating);
-      console.log('Rotten Tomatoes Rating:' + JSON.parse(body).tomatoRating);
-      console.log('Rotten Tomatoes URL: ' + JSON.parse(body).tomatoURL);
-      console.log ('Country: ' + JSON.parse(body).Country);
-      console.log('Language: ' + JSON.parse(body).Language);
-      console.log('Plot: ' + JSON.parse(body).Plot);
-      console.log('Actors:' + JSON.parse(body).Actors);
-      console.log('');
- 
+  request ("http://www.omdbapi.com/?t=" + (userChoice || 'Mr Nobody') + "&y=&plot=short&apikey=" + omdb.key, function (error, response, body) { 
+  
+    if (!error && response.statusCode === 200) {
+        body = JSON.parse(body);
+        console.log('Title', body.Title);
+        console.log('Year: ', body.Year);
+        console.log('IMDB Rating: '+ body.imdbRating);
+        console.log('Rotten Tomatoes Rating:' + body.Ratings[1].Value);
+        console.log('Rotten Tomatoes URL: ' + body.Website);
+        console.log('Country: ' + body.Country);
+        console.log('Language: ' + body.Language);
+        console.log('Plot: ' + body.Plot);
+        console.log('Actors:' + body.Actors);
     } else {
-    console.log(err);
-   } 
+        console.log("error", error);
+    } 
   });
-  }
+}
