@@ -1,9 +1,8 @@
-
+require('dotenv').config();
 var Twitter = require ('twitter');
-//var env = require('dotenv'); It is already required in keys.js
 var Spotify = require ('node-spotify-api');
 var request = require ('request');
-//var omdb = require ('omdb');
+
 
 var fs = require ('fs');
 var keys = require ('./keys.js');
