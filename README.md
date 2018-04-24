@@ -13,14 +13,14 @@ node_modules
 .DS_Store
 .env
 
-![.gitignore example](Images/Screen-Shot-01.png)
+![.gitignore example](images/screenshot-01.png)
 
 
 Make a JavaScript file named keys.js.
 ------------------------------------------------------------------------------------------------------------------------------
 Inside keys.js your file will look like this:
 
-![keys.js example](Images/Screen-Shot-02-01.png)
+![keys.js example](images/screenshot-02.png)
 
 console.log('this is loaded');
 
@@ -62,7 +62,7 @@ Get your Twitter API keys by following these steps:
 Step One: Visit https://apps.twitter.com/app/new
 Step Two: Fill out the form with dummy data. Type http://google.com in the Website input. Don't fill out the Callback URL input. Then submit the form.
 
-![my-tweets](Images/Screen-Shots-03.png)
+![my-tweets](images/screenshot-03.png)
 
 Step Three: On the next screen, click the Keys and Access Tokens tab to get your consume key and secret. 
 
@@ -80,7 +80,7 @@ Copy the access token key and secret displayed at the bottom of the next screen.
 Make a file called random.txt.
 ------------------------------------------------------------------------------------------------------------------------------
 
-![do-what-it-says](Images/Screen-Shot-04)
+![do-what-it-says](images/screenshot-04.png)
 
 Inside of random.txt put the following in with no extra characters or white space:
 
@@ -100,7 +100,7 @@ You should then be able to access your keys information like so
  * var spotify = new Spotify(keys.spotify);
  * var client = new Twitter(keys.twitter);
 
-![liri.js dotenv example](Images/Screen-Shot-04-2.png)
+![liri.js dotenv example](images/screenshot-04-02.png)
 
 # Commands
 
@@ -109,7 +109,6 @@ Make it so liri.js can take in one of the following commands:
 * `my-tweets`
 
 * `spotify-this-song`
-
 * `movie-this`
 
 * `do-what-it-says`
@@ -121,7 +120,7 @@ What Each Command Should Do
 
 node liri.js my-tweets
 
-![my-tweets example](Images/Screen-Shot-06.png)
+![my-tweets example](images/screenshot-06.png)
 
 This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
@@ -130,7 +129,7 @@ This will show your last 20 tweets and when they were created at in your termina
 
 node liri.js spotify-this-song '<song name here>'
  
-![spotify-this-song](Screen-Shots-05-2.png)
+![spotify-this-song](images/screenshot-05-02.png)
 
 This will show the following information about the song in your terminal/bash window
 ------------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +139,7 @@ The song's name
 A preview link of the song from Spotify
 The album that the song is from
 
-![spotify command example](Images/Screen-Shots-05-1.png)
+![spotify command example](images/screenshot-05-01.png)
 
 If no song is provided then your program will default to "The Sign" by Ace of Base.
 You will utilize the node-spotify-api package in order to retrieve song information from the Spotify API.
@@ -167,7 +166,7 @@ This will output the following information to your terminal/bash window:
    * Plot of the movie.
    * Actors in the movie.
 
-![movie-this example](Images/Screen-Shot-07.png)
+![movie-this example](images/screenshot-07.png)
 
 If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
@@ -188,4 +187,4 @@ Using the fs Node package, LIRI will take the text inside of random.txt and then
 It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
 Feel free to change the text in that document to test out the feature for other commands.
 
-![do-what-it-says example](ImagesScreen-Shoot-04.png)
+![do-what-it-says example](images/screenshot-08.png)
