@@ -5,10 +5,10 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI will be a comm
 # Tech/framework used
 
 Built with :
-*Node JS
+* Node JS
 
 IDE:
-Visual Studio Code
+* Visual Studio Code
 
 
 # Instructions
