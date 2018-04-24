@@ -28,7 +28,7 @@ Make a JavaScript file named keys.js.
 ------------------------------------------------------------------------------------------------------------------------------
 Inside keys.js your file will look like this:
 
-![keys.js example](images/screenshot-02.png)
+![keys.js example](images/screenshot-02-02.png)
 
 console.log('this is loaded');
 
